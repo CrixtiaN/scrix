@@ -1,3 +1,5 @@
+//--------------------------------------------------------------------------------------
+
 var the_imgs = document.getElementsByTagName('img');
 window.open(the_imgs[the_imgs.length-1].src);
 location.href=the_imgs[the_imgs.length-1].src+'?&dl=1';
@@ -74,6 +76,7 @@ else
 		loadjQuery();
 	}
 }
+
 //--------------------------------------------------------------------------------------
 
 function jQueryloaded() {
@@ -159,3 +162,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
     alert(jQuery);
 });
 */
+
+//--------------------------------------------------------------------------------------
