@@ -121,23 +121,39 @@ var s = location.hostname.split(".")[1];
 var p = l[5].replace(/\./g,"-");
 var v = l[6]
 var i = l[7];
-var m = $(".window_content:eq(1) > div:first-child").text().replace("MD5: ","");
+var m = $(".window_section:nth-last-child(2) > .window_content > div:first-child").text().replace("MD5: ","");
 var e = ".apk";
 var dl1 = b+s+"/"+p+"-"+v+"-"+i+"-"+m+e;
 dl1;
 
 var l = location.href.split("/");
-var dlink = "http://pool.apk.aptoide.com/"+location.hostname.split(".")[1]+"/"+l[5].replace(/\.|\_/g,"-")+"-"+l[6]+"-"+l[7]+"-"+$(".window_content:eq(1) > div:first-child").text().replace("MD5: ","")+".apk";
+var b = $("body").html();
+//var dlink = "http://pool.apk.aptoide.com/"+location.hostname.split(".")[1]+"/"+l[5].replace(/\.|\_/g,"-").toLowerCase()+"-"+l[6]+"-"+l[7]+"-"+$(".window_section:nth-last-child(2) > .window_content > div:first-child").text().replace("MD5: ","")+".apk";
+var dlink = "http://pool.apk.aptoide.com/"+location.hostname.split(".")[1]+"/"+l[5].replace(/\.|\_/g,"-").toLowerCase()+"-"+l[6]+"-"+l[7]+"-"+b.substr(b.indexOf("MD5:")+14,32)+".apk";
 var djson = "http://webservices.aptoide.com/webservices/getApkInfo/id:"+l[7]+"/json";
 var ls = "http://m.aptoide.com/list/stores/"+l[5]+"/"+l[6];
 console.log(dlink+"\n\n"+djson+"\n\n"+ls);
-//window.open(dlink,"_blank");
+//window.open(dlink,"_self");
 $("#app_install_btn").text("Download").css("display","inline-block").attr({
         "href" : dlink,
         "target" : "_self"
     }).removeAttr("onclick");
 
-var l=location.href.split("/"),dlink="http://pool.apk.aptoide.com/"+location.hostname.split(".")[1]+"/"+l[5].replace(/\.|\_/g,"-")+"-"+l[6]+"-"+l[7]+"-"+$(".window_content:eq(1) > div:first-child").text().replace("MD5: ","")+".apk";$("#app_install_btn").text("Download").attr({href:dlink,target:"_self"}).removeAttr("onclick");    
+//var l=location.href.split("/"),dlink="http://pool.apk.aptoide.com/"+location.hostname.split(".")[1]+"/"+l[5].replace(/\.|\_/g,"-")+"-"+l[6]+"-"+l[7]+"-"+$(".window_section:nth-last-child(2) > .window_content > div:first-child").text().replace("MD5: ","")+".apk";$("#app_install_btn").text("Download").attr({href:dlink,target:"_self"}).removeAttr("onclick");    
 
+var qri = '<img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=' + dlink +'&chld=L|4" alt="QR code">';
+var qrl = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=" + dlink +"&chld=L|4";
+
+/*
+"https://raw.githubusercontent.com/t4t5/sweetalert/master/dist/sweetalert.min.js"
+"https://raw.githubusercontent.com/t4t5/sweetalert/master/dist/sweetalert.css"
+*/
+
+$.getScript("https://rawgit.com/t4t5/sweetalert/master/dist/sweetalert.min.js",function(response,status){alert("loaded "+response+" "+status)});
+$('head').append('<link rel="stylesheet" href="https://rawgit.com/t4t5/sweetalert/master/dist/sweetalert.css"></link>');
+//$('head').append('<script src="https://rawgit.com/t4t5/sweetalert/master/dist/sweetalert.min.js"></script>')
+$("link:last").attr("href").load(function(){
+    swal({   title: "Scan the Qr code!",   imageUrl: qrl, imageSize: "200x200" })
+});
 //--------------------------------------------------------------------------------------
 
