@@ -39,7 +39,11 @@ $("meta[property='og:image']").attr("content");
 window.open($("meta[property='og:image']").attr("content"))
 
 //--------------------------------------------------------------------------------------
-
+//Three ways of get the image
+document.querySelector('meta[property="og:image"]').content
+document.images[1].src
+window._sharedData.entry_data.PostPage[0].media.display_src
+//--------------------------------------------------------------------------------------
 if(window.jQuery)
 {
 	alert("jQuery " + jQuery.fn.jquery /* jQuery().jquery */ + " is loaded!");
